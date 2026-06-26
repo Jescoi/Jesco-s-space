@@ -191,3 +191,51 @@ img {
   0% { transform: translateX(-100%); }
   100% { transform: translateX(100%); }
 }
+
+/* ═══════════════════════════════════════════
+   MOBILE GLOBAL (≤768px)
+   ═══════════════════════════════════════════ */
+@media (max-width: 768px) {
+  :root {
+    --section-padding: 0 clamp(16px, 4vw, 32px);
+  }
+
+  html {
+    font-size: 15px;
+  }
+
+  .section-tag {
+    font-size: 10px;
+    padding: 3px 10px;
+    margin-bottom: 10px;
+  }
+
+  .section-title {
+    font-size: clamp(28px, 8vw, 40px);
+  }
+
+  /* Reduce reveal distance on mobile */
+  .reveal {
+    transform: translateY(32px);
+  }
+
+  /* Smaller shimmer for skeleton on mobile */
+  .section-skeleton {
+    min-height: 40vh;
+  }
+
+  /* Reduce scrollbar width */
+  ::-webkit-scrollbar {
+    width: 3px;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 14px;
+  }
+
+  .section-title {
+    font-size: clamp(24px, 9vw, 34px);
+  }
+}

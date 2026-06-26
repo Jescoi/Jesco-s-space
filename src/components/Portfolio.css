@@ -445,3 +445,116 @@
   z-index: 10;
   position: relative;
 }
+
+/* ═══════════════════════════════════════════
+   MOBILE (≤768px)
+   ═══════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .portfolio {
+    padding: 80px 0;
+  }
+
+  .portfolio__header {
+    margin-bottom: 28px;
+  }
+
+  .portfolio__filters {
+    margin-bottom: 32px;
+    gap: 6px;
+  }
+
+  .portfolio__filter {
+    font-size: 11px;
+    padding: 6px 12px;
+  }
+
+  /* Grid — 2 columns on tablet, 1 on small phone */
+  .portfolio__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 60px;
+  }
+
+  .portfolio-item__info {
+    padding: 12px;
+  }
+
+  .portfolio-item__title {
+    font-size: 12px;
+  }
+
+  .portfolio-item__thumb {
+    aspect-ratio: 4 / 3;
+  }
+
+  /* Showcase — stack columns */
+  .showcase-item {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 32px 0;
+  }
+
+  .showcase-item:nth-child(even) {
+    direction: ltr;
+  }
+
+  .showcase-item__number {
+    font-size: 40px;
+    position: absolute;
+    top: 32px;
+    right: 0;
+    opacity: 0.6;
+    z-index: 0;
+  }
+
+  .showcase-item__image {
+    position: relative;
+    z-index: 1;
+  }
+
+  .showcase-item__content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .showcase-item__title {
+    font-size: 20px;
+  }
+
+  .showcase-item__subtitle {
+    font-size: 12px;
+  }
+
+  .showcase-item__desc {
+    font-size: 13px;
+  }
+
+  /* Photo slots — 2 columns */
+  .showcase-item__photos {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  /* Showcase divider */
+  .showcase__divider {
+    margin-bottom: 40px;
+    gap: 12px;
+  }
+
+  .showcase__divider span {
+    font-size: 10px;
+  }
+
+  /* Disable image zoom on mobile (better UX) */
+  .showcase-item__img:hover,
+  .showcase-item__photo-img:hover {
+    transform: none;
+    z-index: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .portfolio__grid {
+    grid-template-columns: 1fr;
+  }
+}

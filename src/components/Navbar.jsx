@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import './Navbar.css';
 
@@ -11,6 +11,7 @@ const navLinks = [
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const { lang, toggle, t } = useLanguage();
 
   useEffect(() => {
@@ -21,11 +22,18 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const handleClick = (e, href) => {
+  const handleClick = useCallback((e, href) => {
     e.preventDefault();
+    setMenuOpen(false);
     const target = document.querySelector(href);
     if (target) target.scrollIntoView({ behavior: 'smooth' });
-  };
+  }, []);
+
+  // Lock body scroll when menu open
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [menuOpen]);
 
   return (
     <nav className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}>
@@ -35,6 +43,7 @@ export default function Navbar() {
           <span className="navbar__logo-text">ESCO</span>
         </a>
 
+        {/* ── Desktop links ── */}
         <ul className="navbar__links">
           {navLinks.map((link) => (
             <li key={link.href}>
@@ -71,7 +80,35 @@ export default function Navbar() {
           >
             {t.nav.cta}
           </a>
+
+          {/* ── Hamburger button (mobile only) ── */}
+          <button
+            className={`navbar__hamburger ${menuOpen ? 'navbar__hamburger--open' : ''}`}
+            onClick={() => setMenuOpen(prev => !prev)}
+            aria-label="Toggle menu"
+          >
+            <span />
+            <span />
+            <span />
+          </button>
         </div>
+      </div>
+
+      {/* ── Mobile drawer menu ── */}
+      <div className={`navbar__mobile-menu ${menuOpen ? 'navbar__mobile-menu--open' : ''}`}>
+        <ul className="navbar__mobile-links">
+          {navLinks.map((link) => (
+            <li key={link.href}>
+              <a
+                href={link.href}
+                className="navbar__mobile-link"
+                onClick={(e) => handleClick(e, link.href)}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
       </div>
     </nav>
   );

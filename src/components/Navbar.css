@@ -158,3 +158,128 @@
   background: linear-gradient(135deg, #4fc3f7, #9b6dff);
   box-shadow: 0 0 12px rgba(79, 195, 247, 0.3);
 }
+
+/* ═══════════════════════════════════════════
+   MOBILE (≤768px)
+   ═══════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 12px 0;
+  }
+
+  .navbar--scrolled {
+    padding: 10px 0;
+  }
+
+  /* Hide desktop links & CTA on mobile */
+  .navbar__links,
+  .navbar__cta {
+    display: none !important;
+  }
+
+  .navbar__logo-mark {
+    width: 28px;
+    height: 28px;
+    font-size: 15px;
+  }
+
+  .navbar__logo-text {
+    font-size: 14px;
+    margin-left: 6px;
+  }
+
+  .navbar__lang-option {
+    width: 36px;
+    height: 24px;
+    font-size: 11px;
+  }
+
+  /* ── Hamburger button ── */
+  .navbar__hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 36px;
+    height: 36px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1001;
+  }
+
+  .navbar__hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--text-primary);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    transform-origin: center;
+  }
+
+  .navbar__hamburger--open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .navbar__hamburger--open span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  .navbar__hamburger--open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* ── Mobile drawer menu ── */
+  .navbar__mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    background: rgba(8, 8, 15, 0.96);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+  }
+
+  .navbar__mobile-menu--open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .navbar__mobile-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .navbar__mobile-link {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--text-secondary);
+    transition: color 0.2s ease;
+  }
+
+  .navbar__mobile-link:active {
+    color: #4fc3f7;
+  }
+}
+
+@media (min-width: 769px) {
+  .navbar__hamburger {
+    display: none;
+  }
+}

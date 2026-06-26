@@ -265,6 +265,32 @@ export default function Bubbles() {
     window.addEventListener('mousemove', onMove);
     window.addEventListener('mouseup', onUp);
 
+    /* ── touch events (mobile) ── */
+    const onTouchStart = (e) => {
+      if (e.touches.length === 1) {
+        e.preventDefault();
+        const touch = e.touches[0];
+        onDown({ clientX: touch.clientX, clientY: touch.clientY });
+      }
+    };
+
+    const onTouchMove = (e) => {
+      if (e.touches.length === 1) {
+        e.preventDefault();
+        const touch = e.touches[0];
+        onMove({ clientX: touch.clientX, clientY: touch.clientY });
+      }
+    };
+
+    const onTouchEnd = (e) => {
+      e.preventDefault();
+      onUp();
+    };
+
+    canvas.addEventListener('touchstart', onTouchStart, { passive: false });
+    canvas.addEventListener('touchmove', onTouchMove, { passive: false });
+    canvas.addEventListener('touchend', onTouchEnd, { passive: false });
+
     /* ── animation loop ── */
     const loop = () => {
       ctx.clearRect(0, 0, w, h);
@@ -320,6 +346,9 @@ export default function Bubbles() {
       canvas.removeEventListener('mousedown', onDown);
       window.removeEventListener('mousemove', onMove);
       window.removeEventListener('mouseup', onUp);
+      canvas.removeEventListener('touchstart', onTouchStart);
+      canvas.removeEventListener('touchmove', onTouchMove);
+      canvas.removeEventListener('touchend', onTouchEnd);
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
   }, []);

@@ -31,3 +31,25 @@
   width: 100%;
   cursor: pointer;
 }
+
+/* ═══════════════════════════════════════════
+   MOBILE (≤768px)
+   ═══════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .bubbles-section {
+    padding: 80px 0 60px;
+  }
+
+  .bubbles__header {
+    margin-bottom: 28px;
+  }
+
+  .bubbles__subtitle {
+    font-size: 12px;
+  }
+
+  .bubbles__canvas-wrap {
+    max-width: 100%;
+    border-radius: 8px;
+  }
+}

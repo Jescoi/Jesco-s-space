@@ -193,3 +193,90 @@
   border-top: 1px solid #9b6dff;
   border-right: 1px solid #9b6dff;
 }
+
+/* ═══════════════════════════════════════════
+   MOBILE (≤768px)
+   ═══════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .contact {
+    min-height: auto;
+    padding: 80px 0;
+  }
+
+  .contact__title {
+    font-size: clamp(32px, 10vw, 56px);
+    margin-bottom: 20px;
+  }
+
+  .contact__sub {
+    font-size: 13px;
+    max-width: 100%;
+    margin-bottom: 40px;
+  }
+
+  /* Cards — 2 columns */
+  .contact__cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    max-width: 100%;
+    margin-bottom: 50px;
+  }
+
+  .contact__card {
+    padding: 18px 12px;
+    gap: 10px;
+  }
+
+  .contact__card-value {
+    font-size: 12px;
+  }
+
+  .contact__card-label {
+    font-size: 9px;
+  }
+
+  /* Footer — stack */
+  .contact__footer {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+    padding-top: 24px;
+  }
+
+  .contact__footer-copy,
+  .contact__footer-made {
+    font-size: 11px;
+  }
+
+  /* Background adjustments */
+  .contact__bg-grid {
+    background-size: 40px 40px;
+  }
+
+  .contact__bg-glow {
+    width: 400px;
+    height: 400px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact__title {
+    font-size: clamp(28px, 11vw, 42px);
+  }
+
+  .contact__cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .contact__card {
+    padding: 14px 10px;
+  }
+
+  .contact__corner {
+    width: 14px;
+    height: 14px;
+  }
+
+  .contact__corner--tl { top: 10px; left: 10px; }
+  .contact__corner--tr { top: 10px; right: 10px; }
+}
