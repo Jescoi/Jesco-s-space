@@ -51,5 +51,5 @@ export const PROFILE = {
   socials: {
     github: 'https://github.com/Jescoi',
   },
-  avatar: '/images/avatar.jpg',
+  avatar: 'images/avatar.jpg',
 };
