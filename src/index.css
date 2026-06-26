@@ -167,3 +167,27 @@ img {
 .reveal-stagger > .reveal:nth-child(4) { transition-delay: 0.30s; }
 .reveal-stagger > .reveal:nth-child(5) { transition-delay: 0.40s; }
 .reveal-stagger > .reveal:nth-child(6) { transition-delay: 0.50s; }
+
+/* ===== SECTION SKELETON ===== */
+.section-skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-primary);
+}
+
+.section-skeleton__shimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(79, 195, 247, 0.03) 50%,
+    transparent 100%
+  );
+  animation: skeleton-shimmer 1.8s ease-in-out infinite;
+}
+
+@keyframes skeleton-shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
