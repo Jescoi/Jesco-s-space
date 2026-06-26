@@ -9,7 +9,6 @@ const BUBBLE_TEXTS = [
   'AI', '3D Printing', 'Coding',
 ];
 
-const BASE_R      = 100;
 const MAX_SPEED   = 0.6;
 const GRAVITY     = 0.05;
 const DAMPING     = 0.997;
@@ -18,8 +17,10 @@ const RESTITUTION = 0.28;
 const HUE_MIN = 205;
 const HUE_MAX = 270;
 
+const MOBILE_BREAK = 768;
+
 /* ── spawn ── */
-function spawnBubbles(w, h) {
+function spawnBubbles(w, h, baseR) {
   const cx = w / 2;
   const cy = h * 0.4;
   const spread = Math.min(w, h) * 0.28;
@@ -32,7 +33,7 @@ function spawnBubbles(w, h) {
       y: cy + Math.sin(angle) * dist,
       vx: (Math.random() - 0.5) * MAX_SPEED * 0.8,
       vy: (Math.random() - 0.5) * MAX_SPEED * 0.8,
-      r: BASE_R,
+      r: baseR,
       text,
       hue:       HUE_MIN + Math.random() * (HUE_MAX - HUE_MIN),
       hueSpeed:  0.15 + Math.random() * 0.35,
@@ -182,7 +183,11 @@ export default function Bubbles() {
       const rect = parent.getBoundingClientRect();
       const dpr = window.devicePixelRatio || 1;
       w = rect.width;
-      h = Math.max(540, Math.round(rect.width * 0.48));
+      const isMobile = w < MOBILE_BREAK;
+      h = isMobile
+        ? Math.max(360, Math.round(rect.width * 0.72))
+        : Math.max(540, Math.round(rect.width * 0.48));
+      const baseR = isMobile ? 58 : 100;
       dimRef.current = { w, h };
       canvas.width  = w * dpr;
       canvas.height = h * dpr;
@@ -191,7 +196,7 @@ export default function Bubbles() {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
       if (bubblesRef.current.length === 0) {
-        bubblesRef.current = spawnBubbles(w, h);
+        bubblesRef.current = spawnBubbles(w, h, baseR);
       }
     };
 

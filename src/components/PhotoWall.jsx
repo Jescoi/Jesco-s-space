@@ -1,6 +1,12 @@
 import React, { useEffect, useRef, useState, useMemo } from 'react';
 import './PhotoWall.css';
 
+/* ── Helper: mobile src ── */
+function mobileSrc(src) {
+  const lastDot = src.lastIndexOf('.');
+  return lastDot === -1 ? null : src.slice(0, lastDot) + '_mobile.webp';
+}
+
 /* ── All gallery images (auto-served from /public/gallery) ── */
 const ALL_IMAGES = [
   'gallery/0b30efcabfe9f922863860673f176b51.jpg',
@@ -136,7 +142,17 @@ export default function PhotoWall() {
                         onMouseEnter={() => { if (isActive) setHoveredImg(itemId); }}
                         onMouseLeave={() => setHoveredImg(null)}
                       >
-                        <img src={src} alt="" width="300" height="200" draggable={false} loading="lazy" />
+                        {(() => {
+                          const ms = mobileSrc(src);
+                          return ms ? (
+                            <picture>
+                              <source srcSet={ms} media="(max-width: 768px)" />
+                              <img src={src} alt="" width="300" height="200" draggable={false} loading="lazy" />
+                            </picture>
+                          ) : (
+                            <img src={src} alt="" width="300" height="200" draggable={false} loading="lazy" />
+                          );
+                        })()}
                       </div>
                     );
                   })}
