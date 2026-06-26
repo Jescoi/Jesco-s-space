@@ -1,0 +1,195 @@
+.contact {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background: var(--bg-primary);
+  overflow: hidden;
+  padding: 140px 0;
+  border-top: 1px solid transparent;
+  border-image: linear-gradient(90deg, transparent, rgba(79, 195, 247, 0.08), transparent) 1;
+}
+
+/* background */
+.contact__bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(79, 195, 247, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(79, 195, 247, 0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 90% 90% at 50% 50%, black, transparent);
+  pointer-events: none;
+}
+
+.contact__bg-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(155, 109, 255, 0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.contact__inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0;
+}
+
+.contact__eyebrow {
+  margin-bottom: 28px;
+}
+
+.contact__title {
+  font-size: clamp(48px, 7vw, 100px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  color: var(--text-primary);
+  margin-bottom: 28px;
+}
+
+.contact__title span {
+  background: linear-gradient(135deg, #4fc3f7, #9b6dff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.contact__sub {
+  font-size: clamp(14px, 1.4vw, 17px);
+  color: var(--text-secondary);
+  max-width: 560px;
+  line-height: 1.7;
+  margin-bottom: 64px;
+}
+
+/* ===== CARDS ===== */
+.contact__cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  width: 100%;
+  max-width: 900px;
+  margin-bottom: 80px;
+}
+
+.contact__card {
+  background: rgba(13, 13, 26, 0.8);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+  transition: all 0.25s ease;
+  position: relative;
+}
+
+.contact__card--link {
+  cursor: pointer;
+}
+
+.contact__card:hover,
+.contact__card--link:hover {
+  border-color: rgba(79, 195, 247, 0.35);
+  background: rgba(79, 195, 247, 0.04);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+.contact__card-icon {
+  color: #4fc3f7;
+  opacity: 0.8;
+}
+
+.contact__card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.contact__card-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.contact__card-value {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: 0.02em;
+}
+
+.contact__card-arrow {
+  color: var(--text-muted);
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.contact__card:hover .contact__card-arrow {
+  transform: translateX(3px);
+  color: #4fc3f7;
+}
+
+.contact__card-copy {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #4fc3f7;
+  padding: 3px 8px;
+  border: 1px solid rgba(79, 195, 247, 0.25);
+  border-radius: 2px;
+  background: rgba(79, 195, 247, 0.06);
+  cursor: pointer;
+}
+
+/* ===== FOOTER BAR ===== */
+.contact__footer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 32px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.contact__footer-copy,
+.contact__footer-made {
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+/* corners */
+.contact__corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  opacity: 0.3;
+}
+
+.contact__corner--tl {
+  top: 20px; left: 20px;
+  border-top: 1px solid #9b6dff;
+  border-left: 1px solid #9b6dff;
+}
+
+.contact__corner--tr {
+  top: 20px; right: 20px;
+  border-top: 1px solid #9b6dff;
+  border-right: 1px solid #9b6dff;
+}

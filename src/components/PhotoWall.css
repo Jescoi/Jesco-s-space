@@ -1,0 +1,109 @@
+/* ===== PHOTO WALL ===== */
+/* Layer: above video bg (z:0), below text/buttons (z:2) */
+/* Double-buffer architecture: two complete track sets per row, crossfaded */
+
+.photo-wall {
+  position: absolute;
+  /* Extend well beyond viewport edges so the 30deg tilt never shows gaps */
+  inset: -40% -60%;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  overflow: visible;
+  pointer-events: none;
+
+  /* 30-degree tilt for visual interest */
+  transform: rotate(-30deg);
+}
+
+/* ── Row slot (relative container for two overlapping tracks) ── */
+.photo-wall__row-slot {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  pointer-events: auto;
+}
+
+/* ── Row track (one of two buffers, absolutely positioned on top of each other) ── */
+.photo-wall__track {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: max-content;
+  will-change: transform, opacity;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+/* Active buffer — fully visible, accepts hover */
+.photo-wall__track--active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Odd rows → scroll left */
+.photo-wall__track--left {
+  animation: scrollLeft 40s linear infinite;
+}
+/* Even rows → scroll right */
+.photo-wall__track--right {
+  animation: scrollRight 32s linear infinite;
+}
+
+/* Pause the entire row on hover (only on active buffer) */
+.photo-wall__track--paused {
+  animation-play-state: paused !important;
+}
+
+/* ── Individual photo card ── */
+.photo-wall__item {
+  flex-shrink: 0;
+  width: 300px;
+  height: 200px;
+  border-radius: 6px;
+  overflow: hidden;
+  opacity: 0.22;
+  filter: saturate(0.6) brightness(0.7);
+  border: 1px solid rgba(79, 195, 247, 0.08);
+  transition: opacity 0.3s ease, filter 0.3s ease, transform 0.35s cubic-bezier(0.22,1,0.36,1), width 0.35s cubic-bezier(0.22,1,0.36,1), height 0.35s cubic-bezier(0.22,1,0.36,1);
+  transform-origin: center center;
+  cursor: pointer;
+  contain: layout style paint;
+}
+
+/* Hovered photo: double size + full opacity */
+.photo-wall__item--hovered {
+  opacity: 0.92 !important;
+  filter: saturate(1) brightness(1) !important;
+  width: 600px !important;
+  height: 400px !important;
+  z-index: 10;
+  position: relative;
+  box-shadow: 0 0 40px rgba(79, 195, 247, 0.25);
+  border-color: rgba(79, 195, 247, 0.35);
+}
+
+.photo-wall__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  user-select: none;
+}
+
+/* ── Keyframes ── */
+/* scrollLeft: shift by 25% (= one of the 4 copies) */
+@keyframes scrollLeft {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-25%); }
+}
+
+@keyframes scrollRight {
+  0%   { transform: translateX(-25%); }
+  100% { transform: translateX(0); }
+}
