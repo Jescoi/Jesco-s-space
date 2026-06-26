@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import useScrollReveal from '../hooks/useScrollReveal';
 import './Bubbles.css';
 
 /* ── Bubble definitions ── */
@@ -165,6 +166,7 @@ export default function Bubbles() {
   const dragRef    = useRef({ target: null, px: 0, py: 0, vx: 0, vy: 0 });
   const dimRef     = useRef({ w: 800, h: 480 });
   const { t }      = useLanguage();
+  const sectionRef  = useScrollReveal({ threshold: 0.1 });
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -323,7 +325,7 @@ export default function Bubbles() {
   }, []);
 
   return (
-    <section className="bubbles-section" id="bubbles">
+    <section className="bubbles-section reveal" id="bubbles" ref={sectionRef}>
       <div className="bubbles__header">
         <h2 className="section-title">
           My <span>Bubbles</span>

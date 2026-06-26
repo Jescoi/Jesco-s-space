@@ -3,17 +3,17 @@ import './PhotoWall.css';
 
 /* ── All gallery images (auto-served from /public/gallery) ── */
 const ALL_IMAGES = [
-  '/gallery/0b30efcabfe9f922863860673f176b51.jpg',
-  '/gallery/33074e4a61778958d4a11cc4b2e131f8.jpg',
-  '/gallery/3f43e8ca8f53d8c1e98b7dcf527cc8ff.png',
-  '/gallery/5b9916f44f0dacef0d0e67463725caa9.jpg',
-  '/gallery/9dedb4450f1737b3e03faabb2f21f454.jpg',
-  '/gallery/9f38e8db4f5370adf71de7e26ce1c118.jpg',
-  '/gallery/a467c74b787d781cb18ff2e53cfb81aa.png',
-  '/gallery/ac92916579d0e38f174fd53077b82292.png',
-  '/gallery/b58d97bc44de41386fffc90b685cc822.png',
-  '/gallery/b94ba0bc68f9f68a5e278979deaff12c.png',
-  '/gallery/bd7ea480b489bdbd68150393c3e6e870.png',
+  'gallery/0b30efcabfe9f922863860673f176b51.jpg',
+  'gallery/33074e4a61778958d4a11cc4b2e131f8.jpg',
+  'gallery/3f43e8ca8f53d8c1e98b7dcf527cc8ff.png',
+  'gallery/5b9916f44f0dacef0d0e67463725caa9.jpg',
+  'gallery/9dedb4450f1737b3e03faabb2f21f454.jpg',
+  'gallery/9f38e8db4f5370adf71de7e26ce1c118.jpg',
+  'gallery/a467c74b787d781cb18ff2e53cfb81aa.png',
+  'gallery/ac92916579d0e38f174fd53077b82292.png',
+  'gallery/b58d97bc44de41386fffc90b685cc822.png',
+  'gallery/b94ba0bc68f9f68a5e278979deaff12c.png',
+  'gallery/bd7ea480b489bdbd68150393c3e6e870.png',
 ];
 
 const ROWS = 3;
@@ -136,7 +136,7 @@ export default function PhotoWall() {
                         onMouseEnter={() => { if (isActive) setHoveredImg(itemId); }}
                         onMouseLeave={() => setHoveredImg(null)}
                       >
-                        <img src={src} alt="" width="300" height="200" draggable={false} />
+                        <img src={src} alt="" width="300" height="200" draggable={false} loading="lazy" />
                       </div>
                     );
                   })}

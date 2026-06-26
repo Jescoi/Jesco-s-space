@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { WORKS, ALL, CATEGORIES } from '../data/works';
 import { useLanguage } from '../context/LanguageContext';
+import useScrollReveal from '../hooks/useScrollReveal';
 import './Portfolio.css';
 
 export default function Portfolio() {
   const [activeCategory, setActiveCategory] = useState('All');
   const [expandedId, setExpandedId] = useState(null);
   const { t } = useLanguage();
+  const sectionRef = useScrollReveal({ threshold: 0.05 });
 
   // Listen for hash changes (from Projects "View Project" clicks)
   useEffect(() => {
@@ -34,7 +36,7 @@ export default function Portfolio() {
       : WORKS.filter((i) => i.category === activeCategory);
 
   return (
-    <section className="portfolio" id="portfolio">
+    <section className="portfolio reveal" id="portfolio" ref={sectionRef}>
       <div className="container">
         {/* Header */}
         <div className="portfolio__header">
@@ -68,7 +70,7 @@ export default function Portfolio() {
               {/* Cover image */}
               <div className="portfolio-item__thumb">
                 {item.image ? (
-                  <img src={item.image} alt={item.title} className="portfolio-item__thumb-img" />
+                  <img src={item.image} alt={item.title} className="portfolio-item__thumb-img" loading="lazy" />
                 ) : (
                   <div className="portfolio-item__thumb-inner">
                     <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
@@ -119,7 +121,7 @@ export default function Portfolio() {
               </div>
               <div className="showcase-item__image">
                 {item.image ? (
-                  <img src={item.image} alt={item.title} className="showcase-item__img" />
+                  <img src={item.image} alt={item.title} className="showcase-item__img" loading="lazy" />
                 ) : (
                   <div className="showcase-item__image-placeholder">
                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
@@ -163,7 +165,7 @@ export default function Portfolio() {
                 <div className="showcase-item__photos">
                   {item.photos.slice(0, 3).map((src, i) => (
                     <div key={i} className="showcase-item__photo-slot showcase-item__photo-slot--filled">
-                      <img src={src} alt={`${item.title} ${i + 1}`} className="showcase-item__photo-img" />
+                      <img src={src} alt={`${item.title} ${i + 1}`} className="showcase-item__photo-img" loading="lazy" />
                     </div>
                   ))}
                 </div>

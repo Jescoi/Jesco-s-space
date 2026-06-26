@@ -1,18 +1,20 @@
 import React from 'react';
 import { PROFILE } from '../data/profile';
 import { useLanguage } from '../context/LanguageContext';
+import useScrollReveal from '../hooks/useScrollReveal';
 import './About.css';
 
 export default function About() {
   const { t } = useLanguage();
   const { name, stats, skills, socials, avatar } = PROFILE;
+  const sectionRef = useScrollReveal({ threshold: 0.1 });
 
   const bioParagraphs = t.profileBio;
   const statLabels = t.about.stats;
   const skillCatLabels = t.about.skillCategories;
 
   return (
-    <section className="about" id="about">
+    <section className="about reveal" id="about" ref={sectionRef}>
       <div className="container">
         <div className="about__inner">
 
@@ -20,7 +22,7 @@ export default function About() {
           <div className="about__visual">
             <div className="about__avatar-frame">
               {avatar ? (
-                <img src={avatar} alt={name} className="about__avatar-img" />
+                <img src={avatar} alt={name} className="about__avatar-img" loading="lazy" />
               ) : (
                 <div className="about__avatar-placeholder">
                   <svg width="72" height="72" viewBox="0 0 72 72" fill="none">

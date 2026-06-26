@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import useScrollReveal from '../hooks/useScrollReveal';
 import './Contact.css';
 
 export default function Contact() {
   const [copiedTarget, setCopiedTarget] = useState(null);
   const { t } = useLanguage();
+  const sectionRef = useScrollReveal({ threshold: 0.15 });
 
   const handleCopy = (text, target) => {
     navigator.clipboard.writeText(text).then(() => {
@@ -14,7 +16,7 @@ export default function Contact() {
   };
 
   return (
-    <section className="contact" id="contact">
+    <section className="contact reveal" id="contact" ref={sectionRef}>
       {/* Background grid */}
       <div className="contact__bg-grid" />
       <div className="contact__bg-glow" />

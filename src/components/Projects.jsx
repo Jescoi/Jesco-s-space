@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { FEATURED } from '../data/works';
 import { useLanguage } from '../context/LanguageContext';
+import useScrollReveal from '../hooks/useScrollReveal';
 import './Projects.css';
 
 export default function Projects() {
   const [hovered, setHovered] = useState(null);
   const { t } = useLanguage();
+  const sectionRef = useScrollReveal({ threshold: 0.1 });
 
   const handleViewProject = (workId) => {
     // Set hash so Portfolio can pick it up
@@ -22,7 +24,7 @@ export default function Projects() {
   };
 
   return (
-    <section className="projects" id="projects">
+    <section className="projects reveal" id="projects" ref={sectionRef}>
       <div className="container">
         <div className="projects__header">
           <div className="section-tag">Selected Projects</div>
@@ -46,7 +48,7 @@ export default function Projects() {
               {/* Image area */}
               <div className="project-card__image">
                 {project.image ? (
-                  <img src={project.image} alt={project.title} className="project-card__img" />
+                  <img src={project.image} alt={project.title} className="project-card__img" loading="lazy" />
                 ) : (
                   <div className="project-card__image-placeholder">
                     <div className="project-card__image-icon">
